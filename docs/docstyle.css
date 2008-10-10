@@ -11,11 +11,18 @@ body{
   margin: 0;
 }
 
-#header{
-  background: url('images/docs.png') no-repeat 1.286em 0;
+#header {
   border-bottom: solid .071em #999;
   height: 8em;
   text-align: center;
+}
+
+#header a {
+  height: 100px;
+  width: 100px;
+  float: left;
+  background: url('images/docs.png') no-repeat 1.286em 0;
+  display: block;
 }
 
 #toc{
@@ -23,16 +30,6 @@ body{
   border: solid .143em #999;
   margin: 1.286em;
   padding: 1.143em;
-}
-
-#logo {
-  background-image: url('images/docs.png');
-  background-repeat: no-repeat;
-  background-position: top left;
-  float: left;
-  height: 60px;
-  width: 44px;
-  visibility: visible;
 }
 
 #footer{

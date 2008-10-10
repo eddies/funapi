@@ -27,6 +27,7 @@ import fedora.client.FedoraClient;
 
 import fedora.server.access.FedoraAPIA;
 import fedora.server.management.FedoraAPIM;
+import fedora.server.types.gen.DatastreamDef;
 import fedora.server.types.gen.MIMETypedStream;
 import fedora.server.types.gen.RelationshipTuple;
 
@@ -55,8 +56,10 @@ public class FedoraResolverTest {
     private FedoraClient fedoraClient;
     private FedoraAPIA apia;
     private FedoraAPIM apim;
+    private DatastreamDef dsDef;
     private RelationshipTuple tuple;
     private MIMETypedStream ds;
+    private DatastreamDef[] dsDefs;
     private RelationshipTuple[] tuples;
     byte[] bytes;
 
@@ -68,8 +71,11 @@ public class FedoraResolverTest {
         fedoraClient = context.mock(FedoraClient.class);
         apia = context.mock(FedoraAPIA.class);
         apim = context.mock(FedoraAPIM.class);
+        dsDef = context.mock(DatastreamDef.class);
         tuple = context.mock(RelationshipTuple.class);
         ds = context.mock(MIMETypedStream.class);
+        dsDefs = new DatastreamDef[1];
+        dsDefs[0] = dsDef;
         tuples = new RelationshipTuple[1];
         tuples[0] = tuple;
         bytes = json.getBytes();
@@ -96,12 +102,16 @@ public class FedoraResolverTest {
             one(fedoraClient).getAPIM();
                 will(returnValue(apim));
             one(fedoraClient).getAPIA();
-                will(returnValue(apia));
+                will(returnValue(apia));   
             one (apim).getRelationships(with(any(String.class)), 
                                           with(any(String.class)));
                 will(returnValue(tuples));
             one(tuple).getObject();
                 will(returnValue("demo:cmodel"));
+            one(apia).listDatastreams(with(any(String.class)), with(any(String.class)));
+                will(returnValue(dsDefs));
+            one(dsDef).getID();
+                will(returnValue("UNAPI-FORMATS"));
             one(apia).getDatastreamDissemination(with(any(String.class)), 
                                                     with(any(String.class)),
                                                     with(any(String.class)));
@@ -138,6 +148,10 @@ public class FedoraResolverTest {
                 will(returnValue(tuples));
             one(tuple).getObject();
                 will(returnValue("demo:cmodel"));
+            one(apia).listDatastreams(with(any(String.class)), with(any(String.class)));
+                will(returnValue(dsDefs));
+            one(dsDef).getID();
+                will(returnValue("UNAPI-FORMATS"));
             one(apia).getDatastreamDissemination(with(any(String.class)), 
                                                     with(any(String.class)),
                                                     with(any(String.class)));

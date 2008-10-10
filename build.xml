@@ -5,6 +5,7 @@
     
     <!-- set global properties for this build -->
     <property environment="env"/>
+	<property name="version"                   value="0.1"/>
     <property name="javac.debug"               value="on"/>
     <property name="javac.deprecation"         value="on"/>
     <property name="javac.maxwarns"            value="100"/>
@@ -15,6 +16,11 @@
 	<property name="docs.build.dir"            location="${build.dir}/docs"/>
 	<property name="junit.build.dir"           location="${build.dir}/junit"/>
     <property name="war.build.dir"             location="${build.dir}/war"/>
+	<property name="core.build.dir"            location="${build.dir}/core"/>
+	<property name="fedora.build.dir"          location="${build.dir}/fedora"/>
+	<property name="pmh.build.dir"             location="${build.dir}/pmh"/>
+	<property name="dspace-pmh.build.dir"      location="${build.dir}/dspace-pmh"/>
+	<property name="fedora-pmh.build.dir"      location="${build.dir}/dspace-pmh"/>
 
     <property name="dist.dir"                  location="dist"/>
     <property name="lib.dir"                   location="lib"/>
@@ -53,11 +59,12 @@
 	<property name="xmlunit.jar"               value="xmlunit-1.2.jar"/>
     
     <!-- classpaths -->
-	<path id="common.classpath">
+	<path id="core.compile.classpath">
         <pathelement path="${lib.dir}/${servlet-api.jar}"/>
     </path>
 	
-	<path id="fedora.classpath">
+	<path id="fedora.compile.classpath">
+		<pathelement path="${core.build.dir}"/>
 		<pathelement path="${lib.dir}/${axis.jar}"/>
 		<pathelement path="${lib.dir}/${commons-codec.jar}"/>
 		<pathelement path="${lib.dir}/${commons-discovery.jar}"/>
@@ -74,24 +81,24 @@
 		<pathelement path="${lib.dir}/${wsdl4j.jar}"/>
     </path>
     
-	<path id="pmh.classpath">
+	<path id="pmh.compile.classpath">
         <pathelement path="${lib.dir}/${commons-httpclient.jar}"/>
     </path>
 	
-	<path id="dspace-pmh.classpath">
-		<path refid="pmh.classpath"/>
+	<path id="dspace-pmh.compile.classpath">
+		<path refid="pmh.compile.classpath"/>
     </path>
 	
-	<path id="fedora-pmh.classpath">
-        <path refid="pmh.classpath"/>
+	<path id="fedora-pmh.compile.classpath">
+        <path refid="pmh.compile.classpath"/>
     </path>
 	
     <path id="compile.classpath">
-    	<path refid="common.classpath"/>
-    	<path refid="fedora.classpath"/>
-    	<path refid="pmh.classpath"/>
-    	<path refid="dspace-pmh.classpath"/>
-    	<path refid="fedora-pmh.classpath"/>                   
+    	<path refid="core.compile.classpath"/>
+    	<path refid="fedora.compile.classpath"/>
+    	<path refid="pmh.compile.classpath"/>
+    	<path refid="dspace-pmh.compile.classpath"/>
+    	<path refid="fedora-pmh.compile.classpath"/>                   
     </path>
 	
 	<path id="test.classpath">
@@ -107,7 +114,9 @@
 		<pathelement path="${lib.dir}/${spring-test.jar}"/>
 		<pathelement path="${lib.dir}/${xmlunit.jar}"/>
 		<pathelement path="${junit.build.dir}"/>
-		<pathelement path="${build.dir}/classes"/>
+		<fileset dir="${dist.dir}">
+            <include name="*.jar"/>
+        </fileset>
 	</path>
 	
 	<!-- MacroDefs -->
@@ -119,7 +128,6 @@
         <attribute name="includes" default=""/>
         <attribute name="srcdir"/>
         <attribute name="compilerargs" default=""/>
-        <!-- default="-Xlint -Xlint:-path -Xmaxwarns ${javac.maxwarns}" -->
         <sequential>
             <mkdir dir="@{destdir}"/>
             <javac classpathref="@{classpathref}" 
@@ -135,6 +143,45 @@
                    encoding="UTF-8">
                 <compilerarg line="@{compilerargs}"/>
             </javac>
+        </sequential>
+    </macrodef>
+	
+	<macrodef name="md-jar">
+		<attribute name="srcdir"/>
+		<attribute name="destdir" default="${dist.dir}"/>
+        <attribute name="component"/>
+        <attribute name="mainclass" default=""/>
+        <sequential>
+          <jar basedir="@{srcdir}"
+               destfile="@{destdir}/funapi-${version}-@{component}.jar">
+            <manifest>
+              <attribute name="Main-Class" value="@{mainclass}"/>
+            </manifest>
+          </jar>
+        </sequential>
+    </macrodef>
+	
+	<macrodef name="md-jar-component">
+		<attribute name="component"/>
+		<attribute name="srcdir" default="${java.src.dir}"/>
+        <attribute name="destdir" default="${@{component}.build.dir}"/>
+		<attribute name="packagepath"/>
+        <attribute name="includes" default="@{packagepath}/*"/>
+        <attribute name="excludes" default=""/>
+        <attribute name="classpathref" default="@{component}.compile.classpath"/>
+		
+        <sequential>
+          <md-compile srcdir="@{srcdir}"
+                      destdir="@{destdir}"
+                      classpathref="@{classpathref}"
+                      includes="@{includes}"/>
+          <copy todir="@{destdir}">
+            <fileset dir="@{srcdir}">
+              <include name="@{packagepath}/*.properties"/>
+            </fileset>
+          </copy>
+          <md-jar srcdir="@{destdir}"
+                  component="@{component}"/>
         </sequential>
     </macrodef>
     
@@ -153,27 +200,41 @@
         <delete dir="${dist.dir}"/>
     </target>
 	
+	<target name="core" depends="init">
+		<md-jar-component component="core"
+		                  packagepath="org/fedoracommons/unapi"
+                          includes="org/fedoracommons/unapi/*,
+        			                org/fedoracommons/unapi/utilities/*"/>
+	</target>
 	
-
-    <target name="compile" depends="init">
-    	<copy todir="${build.dir}/classes">
-            <fileset dir="${java.src.dir}">
-                <include name="**/*.properties"/>
-            </fileset>
-        </copy>
-    	<md-compile srcdir="${java.src.dir}"
-                    destdir="${build.dir}/classes"
-                    classpathref="compile.classpath"/>       
+	<target name="fedora" depends="core">
+		<md-jar-component component="fedora"
+			              packagepath="org/fedoracommons/unapi/fedora"/>
     </target>
 	
-	<target name="compile-junit" depends="init, compile">
+	<target name="pmh" depends="core">
+        <md-jar-component component="pmh"
+        	              packagepath="org/fedoracommons/unapi/pmh"/>
+    </target>
+	
+	<target name="dspace-pmh" depends="pmh">
+        <md-jar-component component="dspace-pmh"
+                          packagepath="org/fedoracommons/unapi/pmh/dspace"/>
+    </target>
+	
+	<target name="fedora-pmh" depends="pmh">
+        <md-jar-component component="fedora-pmh"
+                          packagepath="org/fedoracommons/unapi/pmh/fedora"/>
+    </target>
+	
+	<target name="compile-junit" depends="init, core, fedora, dspace-pmh, fedora-pmh">
         <md-compile srcdir="${junit.src.dir}"
                     destdir="${junit.build.dir}"
                     classpathref="test.classpath"/>
         <copy todir="${junit.build.dir}" file="${junit.src.dir}/log4j.xml"/>
     </target>
     
-    <target name="war" depends="compile"
+    <target name="war" depends="core, fedora, pmh, dspace-pmh, fedora-pmh"
         description="Build the unAPI HTTP Service Web Application aRchive">
 
         <mkdir dir="${war.build.dir}/WEB-INF/classes"/>
@@ -181,13 +242,13 @@
     	
         <copy todir="${war.build.dir}">
             <fileset dir="${war.src.dir}"/>
-        </copy>
-        
-        <copy todir="${war.build.dir}/WEB-INF/classes">
-            <fileset dir="${build.dir}/classes"/>
+        	<fileset dir="${docs.build.dir}"/>
         </copy>
         
         <copy todir="${war.build.dir}/WEB-INF/lib">
+        	<fileset dir="${dist.dir}">
+                <include name="*.jar"/>
+            </fileset>
             <fileset dir="${lib.dir}">
             	<exclude name="${cglib-nodep.jar}"/>
             	<exclude name="${hamcrest-core.jar}"/>
@@ -205,13 +266,14 @@
         
         <jar jarfile="${dist.dir}/funapi.war" basedir="${war.build.dir}">
             <manifest>
+            	<attribute name="Version" value="${version}"/>
                 <attribute name="Build" value="${build.tstamp}"/>
                 <attribute name="Built-By" value="${user.name}"/>
             </manifest>
         </jar>
     </target>
     
-    <target name="dist" depends="war"/>
+    <target name="dist" depends="docs, war"/>
     
 	<target name="docs" depends="init">
 		<javadoc packagenames="org.fedoracommons.unapi.*" 
@@ -222,7 +284,7 @@
 		         author="true" 
 		         version="true" 
 		         use="true" 
-			     Windowtitle="Fedora Commons unAPI HTTP Service" />
+			     Windowtitle="Fedora unAPI ${version} HTTP Service" />
 		<copy todir="${docs.build.dir}">
             <fileset dir="${docs.dir}"/>
         </copy>

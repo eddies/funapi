@@ -39,8 +39,8 @@ import org.fedoracommons.unapi.UnapiException;
 import org.fedoracommons.unapi.UnapiFormat;
 import org.fedoracommons.unapi.UnapiFormats;
 import org.fedoracommons.unapi.UnapiObject;
+import org.fedoracommons.unapi.utilities.NamespaceContextImpl;
 
-import fedora.utilities.NamespaceContextImpl;
 
 import static org.apache.commons.httpclient.HttpStatus.SC_OK;
 

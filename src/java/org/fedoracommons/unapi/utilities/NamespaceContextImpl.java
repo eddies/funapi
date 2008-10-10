@@ -2,7 +2,7 @@
  * detailed in the license directory at the root of the source tree (also 
  * available online at http://www.fedora.info/license/).
  */
-package fedora.utilities;
+package org.fedoracommons.unapi.utilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 
-import fedora.common.xml.namespace.XMLNamespace;
-
 
 /**
- * An implementation of {@link NamespaceContext NamespaceContext} that provides
+ * An implementation of {@link javax.xml.namespace#NamespaceContext NamespaceContext} that provides
  * an addNamespace method.
  * 
  * @author Edwin Shin
@@ -63,7 +61,7 @@ public class NamespaceContextImpl
         if (prefix2ns.containsKey(prefix)) {
             return prefix2ns.get(prefix);
         }
-        return XMLNamespace.NULL_NS_URI;
+        return XMLConstants.NULL_NS_URI;
     }
 
     /**

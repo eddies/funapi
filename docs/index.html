@@ -31,7 +31,8 @@
     	<li><h3 id="intro">Introduction</h3>
 <p><a href="http://www.unapi.info/">unAPI</a> is an HTTP API for the few basic 
 operations necessary to copy discrete, identified content from any kind of web 
-application.</p>
+application. The Zotero add-on for Firefox is one example of a client that uses 
+unAPI services for resource discovery.</p>
 
 <p>There are three components to an unAPI implementation:</p>
 <ol>
@@ -42,9 +43,10 @@ application.</p>
 
 <p>The Fedora unAPI HTTP Service (funAPI) is a Java implementation of the unAPI 
 HTTP Service. Out of the box, funAPI provides implementations for the Fedora
-Commons Repository Service version 3.1 and DSpace version 1.5. Support for other
-application platforms can be easily provided by implementing the ObjectResolver
-interface. For applications that already provide OAI-PMH services, an 
+Commons Repository Service version 3.x and DSpace version 1.5.x. 
+Support for other application platforms can be easily provided by implementing 
+the ObjectResolver interface. 
+For applications that already provide OAI-PMH services, an 
 AbstractPmhResolver class is provided to get started.</p>
     	</li>
     	
@@ -56,8 +58,14 @@ components are required: Java 5 or higher and Ant 1.7 or higher.</p>
 
 <p>Currently, the war file contains classes and libraries for all supported
 implementations. The web.xml also contains servlet mappings for all supported
-implementations. Future releases will likely provide a smaller core build plus
-implementation-specific builds.</p>
+implementations.</p>
+
+<p>The current implementations typically require editing of Properties files 
+to include installation-specific settings (e.g. the host and port). 
+The properties files are located in the implementation's jar in the war file's 
+WEB-INF/lib directory. 
+For example, the FedoraResolver.properties file is located in 
+WEB-INF/lib/funapi-<i>version</i>-fedora.jar</p>
         </li>
         
         <li><h3 id="fedora">Fedora Implementation</h3>
@@ -119,12 +127,13 @@ FedoraPmhResolver.properties.</p>
 <ol>
     <li><a href="http://www.unapi.info/specs/">unAPI Specifications</a></li>
     <li><a href="api/index.html">funAPI Java API Documentation</a></li>
+    <li><a href="http://www.sourceforge.net/projects/funapi/">funAPI project page on Sourceforge</a> <a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=241792&amp;type=1" width="88" height="31" border="0" alt="SourceForge.net Logo" align="middle"/></a></li>
 </ol>
 </div>
 
 <div id="footer">
 	<div id="copyright">
-		Copyright &copy; 2008 Fedora Commons, Inc.
+		Copyright &copy; 2008 <a href="http://www.fedora-commons.org/">Fedora Commons, Inc.</a>
 	</div>
 </div>
 </body>

@@ -1,0 +1,131 @@
+<html>
+<head>
+	<title>Fedora unAPI HTTP Service</title>
+	<link rel="stylesheet" type="text/css" href="docstyle.css" />
+</head>
+
+<body>
+<div id="header">
+	<h1>Fedora unAPI HTTP Service</h1>
+	<h2>funAPI Release 0.1</h2>
+</div>
+
+<div id="toc">
+    <h2>Table of Contents</h2>
+	<ol>
+		<li><a href="#intro">Introduction</a></li>
+		<li><a href="#install">Installation</a></li>
+		<li><a href="#fedora">Fedora Implementation</a>
+		<li><a href="#pmh">OAI-PMH Implementation</a>
+		<ul>
+			<li><a href="#pmh.dspace">DSpace PMH Implementation</a></li>
+			<li><a href="#pmh.fedora">DSpace PMH Implementation</a></li>
+		</ul>
+		</li>
+		<li><a href="#references">References</a></li>
+	</ol>
+</div>
+
+<div id="content">
+    <ol>
+    	<li><h3 id="intro">Introduction</h3>
+<p><a href="http://www.unapi.info/">unAPI</a> is an HTTP API for the few basic 
+operations necessary to copy discrete, identified content from any kind of web 
+application.</p>
+
+<p>There are three components to an unAPI implementation:</p>
+<ol>
+    <li>an identifier microformat</li>
+    <li>an autodiscovery link pointing to an unAPI service</li>
+    <li>an unAPI HTTP service</li>
+</ol>
+
+<p>The Fedora unAPI HTTP Service (funAPI) is a Java implementation of the unAPI 
+HTTP Service. Out of the box, funAPI provides implementations for the Fedora
+Commons Repository Service version 3.1 and DSpace version 1.5. Support for other
+application platforms can be easily provided by implementing the ObjectResolver
+interface. For applications that already provide OAI-PMH services, an 
+AbstractPmhResolver class is provided to get started.</p>
+    	</li>
+    	
+    	<li><h3 id="install">Installation</h3>
+<p>funAPI is provided as a Java Web Application aRchive and can be installed in
+any Servlet 2.4 container, such as Tomcat or Jetty. Currently, funAPI is only
+distributed as a source archive. In order to build funAPI, the following 
+components are required: Java 5 or higher and Ant 1.7 or higher.</p>
+
+<p>Currently, the war file contains classes and libraries for all supported
+implementations. The web.xml also contains servlet mappings for all supported
+implementations. Future releases will likely provide a smaller core build plus
+implementation-specific builds.</p>
+        </li>
+        
+        <li><h3 id="fedora">Fedora Implementation</h3>
+<p>The Fedora implementation of ObjectResolver expects that for a given object,
+at least one of its content models will have a datastream which describes the 
+available formats for the object.</p>
+
+<code class="block">&lt;json&gt;
+  [["info:fedora/*/DC","oai_dc","text/xml","http://www.openarchives.org/OAI/2.0/oai_dc.xsd"],
+  ["info:fedora/*/sdef:md/get?format=mods","mods","text/xml","http://www.loc.gov/standards/mods/v3/mods-3-2.xsd"]]
+&lt;/json&gt;
+</code>
+
+<p>This is a JSON array wrapped with &lt;json&gt; tags. 
+Those familiar with the Resource Index circa Fedora 2.x might be familiar with 
+the first (inner) array element, known as a dissemination type. 
+It is simply a dissemination URI where the PID of the object is replaced with a 
+"*". 
+funAPI uses the dissemination type to retrieve an object in the requested format.
+The remaining elements correspond directly to the unAPI format elements. 
+This particular implementation was an expedient. Future implementations might 
+employ an sDef &amp; sDep to bind against a service that generates a JSON (or 
+RDF) array.</p>
+
+<p>Configuration parameters for the FedoraResolver are provided by 
+FedoraResolver.properties. The formatsDatastream property is the id of the 
+datastream in the content models that provides the description of the unAPI 
+formats available, as described above.</p>
+<code class="block">baseURL = http://localhost:8080/fedora
+formatsDatastream = UNAPI-FORMATS
+#username = fedoraAdmin
+#password = fedoraAdmin
+#defaultFormats = [["info:fedora/*/DC","oai_dc","text/xml","http://www.openarchives.org/OAI/2.0/oai_dc.xsd"]]</code>
+
+<p>The source distribution contains example objects in src/fedora which can be 
+ingested into a Fedora Repository. Although funAPI is designed to run with 
+Fedora 3.0 or higher, the example objects rely on new features in 3.1 for the 
+metadata disseminations.</p>
+        </li>
+        
+        <li><h3 id="fedora">OAI-PMH Implementation</h3>
+OAI-PMH resolvers rely on the concrete implementations to translate the unAPI
+identifiers into OAI-PMH identifiers.
+        <ol>
+            <li><h3 id="pmh.dspace">DSpace PMH Implementation</h3>
+<p>Configuration parameters for the DSpacePmhResolver are provided by 
+DSpacePmhResolver.properties. The DSpacePmhResolver expects handle identifiers
+of the form "hdl:1234/5" or "http://my.handle.server/1234/5".</p>
+            </li>
+            
+            <li><h3 id="pmh.fedora">Fedora PMH Implementation</h3>
+<p>Configuration parameters for the FedoraPmhResolver are provided by 
+FedoraPmhResolver.properties.</p>
+        
+            </li>
+        </ol>
+        </li>
+        <li><h3 id="references">References</h3>
+<ol>
+    <li><a href="http://www.unapi.info/specs/">unAPI Specifications</a></li>
+    <li><a href="api/index.html">funAPI Java API Documentation</a></li>
+</ol>
+</div>
+
+<div id="footer">
+	<div id="copyright">
+		Copyright &copy; 2008 Fedora Commons, Inc.
+	</div>
+</div>
+</body>
+</html>

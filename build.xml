@@ -290,6 +290,18 @@
         </copy>
 	</target>
 	
+	<target name="srcrelease" depends="init">
+		<copy todir="dist/funapi-${version}-src">
+	      <fileset dir=".">
+	        <exclude name="build/**"/>
+	        <exclude name="dist/**"/>
+	      </fileset>
+	    </copy>
+		<zip zipfile="dist/funapi-${version}-src.zip" 
+	         basedir="dist" 
+	         includes="funapi-${version}-src/**"/>
+	</target>
+	
 	<target name="junit" depends="compile-junit">
 		<property name="test" value="org.fedoracommons.unapi.AllTests"/>
 		

@@ -5,7 +5,7 @@
     
     <!-- set global properties for this build -->
     <property environment="env"/>
-	<property name="version"                   value="0.1"/>
+	<property name="version"                   value="0.2"/>
     <property name="javac.debug"               value="on"/>
     <property name="javac.deprecation"         value="on"/>
     <property name="javac.maxwarns"            value="100"/>
@@ -26,6 +26,7 @@
     <property name="lib.dir"                   location="lib"/>
     
 	<property name="docs.dir"                  location="docs"/>
+	<property name="license.dir"               location="license"/>
     <property name="src.dir"                   location="src"/>
     <property name="java.src.dir"              location="${src.dir}/java"/>
 	<property name="junit.src.dir"             location="${src.dir}/test"/>
@@ -287,6 +288,9 @@
 			     Windowtitle="Fedora unAPI ${version} HTTP Service" />
 		<copy todir="${docs.build.dir}">
             <fileset dir="${docs.dir}"/>
+        </copy>
+		<copy todir="${docs.build.dir}/license">
+			<fileset dir="${license.dir}"/>
         </copy>
 	</target>
 	

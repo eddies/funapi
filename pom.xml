@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.fedoracommons.funapi</groupId>
+  <artifactId>funapi</artifactId>
+  <packaging>pom</packaging>
+  <version>0.2-SNAPSHOT</version>
+  <name>Fedora unAPI HTTP Service</name>
+  <description>Java implementation of the unAPI HTTP service.</description>
+  <url>http://funapi.sourceforge.net/</url>
+  <modules>
+    <module>core</module>
+    <module>fedora</module>
+    <module>pmh</module>
+    <module>pmh-dspace</module>
+    <module>pmh-fedora</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.5</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>xmlunit</groupId>
+        <artifactId>xmlunit</artifactId>
+        <version>1.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock</artifactId>
+        <version>2.5.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock-junit4</artifactId>
+        <version>2.5.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.jmock</groupId>
+        <artifactId>jmock-legacy</artifactId>
+        <version>2.5.1</version>
+    </dependency>
+  </dependencies>
+  <inceptionYear>2008</inceptionYear>
+  <issueManagement>
+  	<system>JIRA</system>
+  	<url>https://fedora-commons.org/jira/browse/FUNAPI</url>
+  </issueManagement>
+  <organization>
+  	<name>Fedora Commons, Inc.</name>
+  	<url>http://www.fedora-commons.org/</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

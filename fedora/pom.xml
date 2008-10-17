@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.fedoracommons.funapi</groupId>
+    <artifactId>funapi</artifactId>
+    <version>0.2-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.fedoracommons.funapi</groupId>
+  <artifactId>funapi-fedora</artifactId>
+  <packaging>jar</packaging>
+  <version>0.2-SNAPSHOT</version>
+  <name>funAPI Fedora</name>
+  <repositories>
+  	<repository>
+  		<id>codehaus</id>
+  		<name>Maven Codehaus repository</name>
+  		<url>http://repository.codehaus.org/</url>
+  	</repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-core</artifactId>
+      <version>0.2-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mulgara</groupId>
+      <artifactId>mulgara-core</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.codehaus.jackson</groupId>
+    	<artifactId>jackson-asl</artifactId>
+    	<version>0.9.3</version>
+    </dependency>
+  </dependencies>
+</project>

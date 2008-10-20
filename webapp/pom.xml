@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>org.fedoracommons.funapi</groupId>
+    <artifactId>funapi</artifactId>
+    <version>0.2-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.fedoracommons.funapi</groupId>
+  <artifactId>funapi-webapp</artifactId>
+  <packaging>war</packaging>
+  <version>0.2-SNAPSHOT</version>
+  <name>funAPI Web Application</name>
+  <repositories>
+    <repository>
+        <id>fedoracommons</id>
+        <name>Fedora Commons Maven 2 Repository</name>
+        <url>http://m2.fedoracommons.org/repository</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-fedora</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-pmh-dspace</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-pmh-fedora</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

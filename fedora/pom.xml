@@ -12,11 +12,11 @@
   <version>0.2-SNAPSHOT</version>
   <name>funAPI Fedora</name>
   <repositories>
-  	<repository>
-  		<id>codehaus</id>
-  		<name>Maven Codehaus repository</name>
-  		<url>http://repository.codehaus.org/</url>
-  	</repository>
+    <repository>
+        <id>fedoracommons</id>
+        <name>Fedora Commons Maven 2 Repository</name>
+        <url>http://m2.fedoracommons.org/repository</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
@@ -25,9 +25,14 @@
       <version>0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.mulgara</groupId>
+      <groupId>org.fedoracommons.fedora</groupId>
+      <artifactId>fedora-client</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mulgara.mulgara</groupId>
       <artifactId>mulgara-core</artifactId>
-      <version>2.0.5</version>
+      <version>2.0.6</version>
     </dependency>
     <dependency>
     	<groupId>org.codehaus.jackson</groupId>

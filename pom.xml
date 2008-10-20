@@ -15,6 +15,13 @@
     <module>pmh-dspace</module>
     <module>pmh-fedora</module>
   </modules>
+  <repositories>
+    <repository>
+        <id>fedoracommons</id>
+        <name>Fedora Commons Maven 2 Repository</name>
+        <url>http://m2.fedoracommons.org/repository</url>
+    </repository>
+  </repositories>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -73,4 +80,11 @@
       </plugin>
     </plugins>
   </build>
+  <distributionManagement>
+    <repository>
+        <id>fedoracommons</id>
+        <name>Fedora Commons Maven2 Repository</name>
+        <url>scp://m2.fedoracommons.org/home/m2/repository</url>
+    </repository>
+  </distributionManagement>
 </project>

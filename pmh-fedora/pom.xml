@@ -17,7 +17,14 @@
     <dependency>
       <groupId>org.fedoracommons.funapi</groupId>
       <artifactId>funapi-pmh</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.fedoracommons.funapi</groupId>
+      <artifactId>funapi-pmh</artifactId>
+      <version>${project.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

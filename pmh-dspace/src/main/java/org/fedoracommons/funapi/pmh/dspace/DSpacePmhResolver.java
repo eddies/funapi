@@ -33,7 +33,7 @@ public class DSpacePmhResolver
     
     public DSpacePmhResolver()
             throws UnapiException {
-        InputStream in = this.getClass().getResourceAsStream("DSpacePmhResolver.properties");
+        InputStream in = getClass().getResourceAsStream("/DSpacePmhResolver.properties");
         props = new Properties();
         try {
             props.load(in);

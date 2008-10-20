@@ -106,7 +106,7 @@ public class FedoraResolver
     private HttpClient httpClient;
     
     public FedoraResolver() throws UnapiException {
-        InputStream in = this.getClass().getResourceAsStream("FedoraResolver.properties");
+        InputStream in = getClass().getResourceAsStream("/FedoraResolver.properties");
         props = new Properties();
         try {
             props.load(in);

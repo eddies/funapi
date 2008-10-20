@@ -34,7 +34,7 @@ public class FedoraPmhResolver
     
     public FedoraPmhResolver()
             throws UnapiException {
-        InputStream in = this.getClass().getResourceAsStream("FedoraPmhResolver.properties");
+        InputStream in = getClass().getResourceAsStream("/FedoraPmhResolver.properties");
         props = new Properties();
         try {
             props.load(in);

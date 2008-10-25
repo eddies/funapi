@@ -1,16 +1,20 @@
 <project>
 	<bannerLeft>
 		<name>funAPI</name>
-		<src>/images/funapi_logo_white_400_78.png</src>
-		<href>/</href>
+		<src>http://funapi.sourceforge.net/images/funapi_logo_horizontal_transparent_400_78.png</src>
+		<href>http://funapi.sourceforge.net/</href>
 	</bannerLeft>
 	<body>
 		<links>
 			<item name="Fedora Commons" href="${project.organization.url}" />
 		</links>
 
-	    <menu ref="parent" />
+		<menu ref="parent" />
 		<menu ref="modules" />
 		<menu ref="reports" />
 	</body>
+	<poweredBy>
+		<logo name="SourceForge.net" href="http://sourceforge.net"
+			img="http://sflogo.sourceforge.net/sflogo.php?group_id=241792&amp;type=2" />
+	</poweredBy>
 </project>

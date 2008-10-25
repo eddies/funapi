@@ -8,12 +8,12 @@
 	<description>Java implementation of the unAPI HTTP service.</description>
 	<url>http://funapi.sourceforge.net/</url>
 	<modules>
-		<module>core</module>
-		<module>fedora</module>
-		<module>pmh</module>
-		<module>pmh-dspace</module>
-		<module>pmh-fedora</module>
-		<module>webapp</module>
+		<module>funapi-core</module>
+		<module>funapi-fedora</module>
+		<module>funapi-pmh</module>
+		<module>funapi-pmh-dspace</module>
+		<module>funapi-pmh-fedora</module>
+		<module>funapi-webapp</module>
 	</modules>
 	<repositories>
 		<repository>
@@ -104,7 +104,9 @@
 		</repository>
 		<site>
 			<id>funapi-web</id>
-			<url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url>
+			<!-- site upload to SF is currently broken: http://jira.codehaus.org/browse/MSITE-362
+			<url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url> -->
+		    <url>file:///tmp/funapi-site</url>
 		</site>
 
 	</distributionManagement>

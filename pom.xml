@@ -1,11 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fedoracommons.funapi</groupId>
 	<artifactId>funapi</artifactId>
 	<packaging>pom</packaging>
 	<version>0.3-SNAPSHOT</version>
 	<name>Fedora unAPI HTTP Service</name>
-	<description>Java implementation of the unAPI HTTP service.</description>
+	<description>Java implementation of the unAPI HTTP service.
+	</description>
 	<url>http://funapi.sourceforge.net/</url>
 	<modules>
 		<module>funapi-core</module>
@@ -19,7 +21,8 @@
 		<repository>
 			<id>fedoracommons</id>
 			<name>Fedora Commons Maven 2 Repository</name>
-			<url>http://m2.fedoracommons.org/repository</url>
+			<url>http://m2.fedoracommons.org/repository
+			</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -57,16 +60,22 @@
 	<inceptionYear>2008</inceptionYear>
 	<issueManagement>
 		<system>JIRA</system>
-		<url>https://fedora-commons.org/jira/browse/FUNAPI</url>
+		<url>https://fedora-commons.org/jira/browse/FUNAPI
+		</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</connection>
-		<developerConnection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</developerConnection>
-		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/</url>
+		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi
+		</connection>
+		<developerConnection>
+			scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi
+		</developerConnection>
+		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/trunk/
+		</url>
 	</scm>
 	<organization>
 		<name>Fedora Commons, Inc.</name>
-		<url>http://www.fedora-commons.org/</url>
+		<url>http://www.fedora-commons.org/
+		</url>
 	</organization>
 	<developers>
 		<developer>
@@ -79,7 +88,8 @@
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt
+			</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -90,9 +100,26 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>${compileSource}</source>
+					<target>${compileSource}</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins
+				</groupId>
+				<artifactId>maven-clover2-plugin</artifactId>
+				<configuration>
+					<jdk>${compileSource}</jdk>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -100,37 +127,41 @@
 		<repository>
 			<id>fedoracommons</id>
 			<name>Fedora Commons Maven2 Repository</name>
-			<url>scp://m2.fedoracommons.org/home/m2/repository</url>
+			<url>scp://m2.fedoracommons.org/home/m2/repository
+			</url>
 		</repository>
 		<site>
 			<id>funapi-web</id>
-			<!-- site upload to SF is currently broken: http://jira.codehaus.org/browse/MSITE-362
-			<url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url> -->
-		    <url>file:///tmp/funapi-site</url>
+			<!--
+				site upload to SF is currently broken:
+				http://jira.codehaus.org/browse/MSITE-362
+				<url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url>
+			-->
+			<url>file:///tmp/funapi-site</url>
 		</site>
 
 	</distributionManagement>
 	<reporting>
 		<plugins>
 			<plugin>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<artifactId>maven-project-info-reports-plugin
+				</artifactId>
 				<configuration>
-				    <locales>en</locales>
+					<locales>en</locales>
 					<inputencoding>utf-8</inputencoding>
 					<outputencoding>utf-8</outputencoding>
-                    <dependencyLocationEnabled>false</dependencyLocationEnabled>
-                </configuration>
+					<dependencyLocationEnabled>false</dependencyLocationEnabled>
+				</configuration>
 				<reportSets>
 					<reportSet>
 						<reports>
 							<report>dependencies</report>
 							<report>project-team</report>
 							<!--
-							<report>mailing-list</report>
-							<report>cim</report> 
+								<report>mailing-list</report> <report>cim</report>
 							-->
 							<report>issue-tracking</report>
-<!--							<report>license</report>-->
+							<report>license</report>
 							<report>scm</report>
 							<report>index</report>
 						</reports>
@@ -140,14 +171,45 @@
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
-                    <!-- <goal>javadoc:aggregate</goal>-->
-				    <aggregate>true</aggregate>
-				    <encoding>utf-8</encoding>
+					<!-- <goal>javadoc:aggregate</goal>-->
+					<aggregate>true</aggregate>
+					<encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
 			<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins
+				</groupId>
+				<artifactId>maven-clover2-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<aggregate>true</aggregate>
+					<targetJdk>${compileSource}</targetJdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+						<ruleset>/rulesets/controversial.xml
+						</ruleset>
+						<ruleset>/rulesets/sunsecure.xml</ruleset>
+					</rulesets>
+					<format>xml</format>
+					<linkXref>true</linkXref>
+					<sourceEncoding>utf-8</sourceEncoding>
+					<minimumTokens>100</minimumTokens>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
 		</plugins>
 	</reporting>
+	<properties>
+		<compileSource>1.5</compileSource>
+	</properties>
 </project>

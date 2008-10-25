@@ -17,7 +17,7 @@ public interface ObjectResolver {
      *         objects.
      * @throws UnapiException
      */
-    public UnapiFormats getFormats() throws UnapiException;
+    UnapiFormats getFormats() throws UnapiException;
     
     /**
      * Provide a list of object formats available from the unAPI service for the 
@@ -30,7 +30,7 @@ public interface ObjectResolver {
      *         requested object.
      * @throws UnapiException
      */
-    public UnapiFormats getFormats(String id) throws UnapiException;
+    UnapiFormats getFormats(String id) throws UnapiException;
     
     /**
      * <p>Return an {@link UnapiObject UnapiObject} representing the object 
@@ -49,5 +49,5 @@ public interface ObjectResolver {
      * @return UnapiObject
      * @throws UnapiException
      */
-    public UnapiObject getObject(String id, String format) throws UnapiException;
+    UnapiObject getObject(String id, String format) throws UnapiException;
 }

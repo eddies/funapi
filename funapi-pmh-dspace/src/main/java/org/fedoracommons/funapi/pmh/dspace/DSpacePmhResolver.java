@@ -65,7 +65,7 @@ public class DSpacePmhResolver
      */
     @Override
     protected String getPmhId(String id) {
-        String oaiId = null;
+        String oaiId;
         if (id.startsWith("hdl:")) {
             oaiId = pmhIdPrefix + id.substring("hdl:".length());
         } else if (id.startsWith("http://")) {

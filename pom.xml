@@ -3,7 +3,7 @@
 	<groupId>org.fedoracommons.funapi</groupId>
 	<artifactId>funapi</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<name>Fedora unAPI HTTP Service</name>
 	<description>Java implementation of the unAPI HTTP service.</description>
 	<url>http://funapi.sourceforge.net/</url>
@@ -60,9 +60,9 @@
 		<url>https://fedora-commons.org/jira/browse/FUNAPI</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi/tags/funapi-0.2</connection>
-		<developerConnection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi/tags/funapi-0.2</developerConnection>
-		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/tags/funapi-0.2</url>
+		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</connection>
+		<developerConnection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</developerConnection>
+		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/</url>
 	</scm>
 	<organization>
 		<name>Fedora Commons, Inc.</name>

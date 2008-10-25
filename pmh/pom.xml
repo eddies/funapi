@@ -2,13 +2,13 @@
   <parent>
     <groupId>org.fedoracommons.funapi</groupId>
     <artifactId>funapi</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.fedoracommons.funapi</groupId>
   <artifactId>funapi-pmh</artifactId>
   <packaging>jar</packaging>
-  <version>0.2</version>
+  <version>0.3-SNAPSHOT</version>
   <name>funapi-pmh</name>
   <repositories>
   </repositories>
@@ -16,7 +16,7 @@
     <dependency>
       <groupId>org.fedoracommons.funapi</groupId>
       <artifactId>funapi-core</artifactId>
-      <version>0.2</version>
+      <version>0.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>

@@ -1,7 +1,7 @@
 <project>
 	<bannerLeft>
 		<name>funAPI</name>
-		<src>images/funapi_logo_white_400_78.png</src>
+		<src>/images/funapi_logo_white_400_78.png</src>
 		<href>/</href>
 	</bannerLeft>
 	<body>

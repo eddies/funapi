@@ -113,18 +113,23 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<configuration>
+				    <locales>en</locales>
+					<inputencoding>utf-8</inputencoding>
+					<outputencoding>utf-8</outputencoding>
+                    <dependencyLocationEnabled>false</dependencyLocationEnabled>
+                </configuration>
 				<reportSets>
 					<reportSet>
 						<reports>
-							<!--
-								<report>dependencies</report>
-							-->
+							<report>dependencies</report>
 							<report>project-team</report>
 							<report>mailing-list</report>
 							<report>cim</report>
 							<report>issue-tracking</report>
 							<report>license</report>
 							<report>scm</report>
+							<report>index</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -139,9 +144,14 @@
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
-					<goal>javadoc:aggregate</goal>
+                    <!-- <goal>javadoc:aggregate</goal>-->
+				    <aggregate>true</aggregate>
+				    <encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
+			<plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
 		</plugins>
 	</reporting>
 </project>

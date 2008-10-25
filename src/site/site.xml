@@ -1,0 +1,16 @@
+<project>
+	<bannerLeft>
+		<name>funAPI</name>
+		<src>images/funapi_logo_white_400_78.png</src>
+		<href>/</href>
+	</bannerLeft>
+	<body>
+		<links>
+			<item name="Fedora Commons" href="${project.organization.url}" />
+		</links>
+
+	    <menu ref="parent" />
+		<menu ref="modules" />
+		<menu ref="reports" />
+	</body>
+</project>

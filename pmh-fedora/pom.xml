@@ -10,7 +10,7 @@
   <artifactId>funapi-pmh-fedora</artifactId>
   <packaging>jar</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI PMH-Fedora</name>
+  <name>funapi-pmh-fedora</name>
   <repositories>
   </repositories>
   <dependencies>

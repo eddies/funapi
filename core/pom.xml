@@ -10,7 +10,7 @@
   <artifactId>funapi-core</artifactId>
   <packaging>jar</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI core</name>
+  <name>funapi-core</name>
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>

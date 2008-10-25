@@ -10,7 +10,7 @@
   <artifactId>funapi-webapp</artifactId>
   <packaging>war</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI Web Application</name>
+  <name>funapi-webapp</name>
   <repositories>
     <repository>
         <id>fedoracommons</id>

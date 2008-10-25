@@ -10,7 +10,7 @@
   <artifactId>funapi-pmh</artifactId>
   <packaging>jar</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI PMH</name>
+  <name>funapi-pmh</name>
   <repositories>
   </repositories>
   <dependencies>

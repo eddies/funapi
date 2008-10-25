@@ -10,7 +10,7 @@
   <artifactId>funapi-fedora</artifactId>
   <packaging>jar</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI Fedora</name>
+  <name>funapi-fedora</name>
   <repositories>
     <repository>
         <id>fedoracommons</id>

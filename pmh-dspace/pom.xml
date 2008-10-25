@@ -10,7 +10,7 @@
   <artifactId>funapi-pmh-dspace</artifactId>
   <packaging>jar</packaging>
   <version>0.2-SNAPSHOT</version>
-  <name>funAPI PMH-DSpace</name>
+  <name>funapi-pmh-dspace</name>
   <repositories>
   </repositories>
   <dependencies>

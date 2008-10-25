@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fedoracommons.funapi</groupId>
 	<artifactId>funapi</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>Fedora unAPI HTTP Service</name>
 	<description>Java implementation of the unAPI HTTP service.</description>
 	<url>http://funapi.sourceforge.net/</url>
@@ -61,9 +60,9 @@
 		<url>https://fedora-commons.org/jira/browse/FUNAPI</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</connection>
-		<developerConnection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi</developerConnection>
-		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/</url>
+		<connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi/tags/funapi-0.2</connection>
+		<developerConnection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi/tags/funapi-0.2</developerConnection>
+		<url>http://funapi.svn.sourceforge.net/viewvc/funapi/tags/funapi-0.2</url>
 	</scm>
 	<organization>
 		<name>Fedora Commons, Inc.</name>

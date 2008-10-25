@@ -16,7 +16,7 @@ import javax.xml.namespace.NamespaceContext;
 
 
 /**
- * An implementation of {@link javax.xml.namespace#NamespaceContext NamespaceContext} that provides
+ * An implementation of {@link javax.xml.namespace.NamespaceContext NamespaceContext} that provides
  * an addNamespace method.
  * 
  * @author Edwin Shin
@@ -42,7 +42,8 @@ public class NamespaceContextImpl
      * 
      * @param prefix2ns a mapping of prefixes to namespaces.
      * @throws IllegalArgumentException if prefix2ns contains 
-     * {@value XMLConstants.XML_NS_URI} or {@value XMLConstants.XMLNS_ATTRIBUTE_NS_URI}
+     * {@value javax.xml.XMLConstants#XML_NS_URI} or 
+     * {@value javax.xml.XMLConstants#XMLNS_ATTRIBUTE_NS_URI}
      */
     public NamespaceContextImpl(Map<String, String> prefix2ns) {
         this();
@@ -99,7 +100,8 @@ public class NamespaceContextImpl
      * @param prefix
      * @param namespaceURI
      * @throws IllegalArgumentException if namespaceURI is one of 
-     * {@value XMLConstants.XML_NS_URI} or {@value XMLConstants.XMLNS_ATTRIBUTE_NS_URI}
+     * {@value javax.xml.XMLConstants#XML_NS_URI} or 
+     * {@value javax.xml.XMLConstants#XMLNS_ATTRIBUTE_NS_URI}
      */
     public void addNamespace(String prefix, String namespaceURI) {
         if (prefix == null || namespaceURI == null) {

@@ -104,8 +104,8 @@
 			<url>scp://m2.fedoracommons.org/home/m2/repository</url>
 		</repository>
 		<site>
-			<id>website</id>
-			<url>file:///tmp/foo</url>
+			<id>funapi-web</id>
+			<url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url>
 		</site>
 
 	</distributionManagement>

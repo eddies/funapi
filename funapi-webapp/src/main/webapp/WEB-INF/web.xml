@@ -40,6 +40,11 @@
             <param-value>org.fedoracommons.funapi.pmh.fedora.FedoraPmhResolver</param-value>
         </init-param>
     </servlet>
+    
+    <servlet>
+        <servlet-name>echo_jsp</servlet-name>  
+        <jsp-file>/echo.jsp</jsp-file>
+    </servlet> 
 
 	<servlet-mapping>
 		<servlet-name>FedoraUnapiServlet</servlet-name>
@@ -55,4 +60,10 @@
         <servlet-name>FedoraPmhUnapiServlet</servlet-name>
         <url-pattern>/fedora-pmh</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>echo_jsp</servlet-name>
+        <url-pattern>/echo/*</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

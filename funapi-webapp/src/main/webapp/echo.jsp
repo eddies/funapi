@@ -45,7 +45,7 @@ if (pathInfo != null && pathInfo.length() > 1) {
     <%=baseURL%><%=request.getServletPath()%>/<i>service</i>/<i>id</i>
     </blockquote>
     substituting the funAPI service (e.g. fedora or pmh-dspace) for 
-    <i>service</i>and the id of the resource (e.g. info:fedora/demo:foo) for 
+    <i>service</i> and the id of the resource (e.g. info:fedora/demo:foo) for 
     <i>id</i>.</p>
     
     <p>The above request will return this page, with &lt;link&gt; and 

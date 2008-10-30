@@ -53,12 +53,12 @@
 	
 	<servlet-mapping>
         <servlet-name>DSpacePmhUnapiServlet</servlet-name>
-        <url-pattern>/dspace-pmh</url-pattern>
+        <url-pattern>/pmh-dspace</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>FedoraPmhUnapiServlet</servlet-name>
-        <url-pattern>/fedora-pmh</url-pattern>
+        <url-pattern>/pmh-fedora</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

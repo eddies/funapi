@@ -16,8 +16,8 @@ unAPI services for resource discovery.
     []
 
     The Fedora unAPI HTTP Service (funAPI) is a Java implementation of the unAPI 
-HTTP Service. Out of the box, funAPI provides implementations for the Fedora
-Commons Repository Service version 3.x and DSpace version 1.5.x. 
+HTTP Service, version 1. Out of the box, funAPI provides implementations for the 
+Fedora Commons Repository Service version 3.x and DSpace version 1.5.x. 
 Support for other application platforms can be easily provided by implementing 
 the ObjectResolver interface. 
 For applications that already provide OAI-PMH services, an 
@@ -26,7 +26,7 @@ AbstractPmhResolver class is provided to get started.
 Installation
 
     funAPI is provided as a Java Web Application aRchive and can be installed in
-any Servlet 2.4 container, such as Tomcat or Jetty. In order to build funAPI 
+any Servlet 2.4 container, such as Tomcat or Jetty. In order to build the funAPI 
 source distribution, the following components are required: Java 5 or higher and 
 Maven 2.
 
@@ -39,7 +39,7 @@ to include installation-specific settings (e.g. the host and port).
 The properties files are located in the implementation's jar in the war file's 
 WEB-INF/lib directory. 
 For example, the FedoraResolver.properties file is located in 
-WEB-INF/lib/funapi-fedora-${version}.jar
+WEB-INF/lib/funapi-fedora-VERSION.jar
 
 Fedora Implementation
 

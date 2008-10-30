@@ -8,8 +8,6 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>funapi-pmh-dspace</artifactId>
   <name>funapi-pmh-dspace</name>
-  <repositories>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.fedoracommons.funapi</groupId>

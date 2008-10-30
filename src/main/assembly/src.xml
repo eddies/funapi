@@ -1,0 +1,35 @@
+<assembly>
+	<id>src</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<includes>
+				<include>README*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+				<include>pom.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>src</directory>
+		</fileSet>
+	</fileSets>
+	<moduleSets>
+		<moduleSet>
+			<sources>
+				<fileSets>
+					<fileSet>
+						<excludes>
+							<exclude>target/**</exclude>
+							<exclude>.classpath</exclude>
+							<exclude>.project</exclude>
+							<exclude>.settings/**</exclude>
+						</excludes>
+					</fileSet>
+				</fileSets>
+			</sources>
+		</moduleSet>
+	</moduleSets>
+</assembly>

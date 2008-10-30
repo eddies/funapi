@@ -1,0 +1,33 @@
+<assembly>
+	<id>bin</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<fileSets>
+		<fileSet>
+			<includes>
+				<include>README*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+
+	<moduleSets>
+		<moduleSet>
+			<sources>
+				<fileSets>
+					<fileSet>
+						<directory>target</directory>
+						<includes>
+							<include>*.jar</include>
+							<include>*.war</include>
+							<include>*.ear</include>
+						</includes>
+					</fileSet>
+				</fileSets>
+			</sources>
+		</moduleSet>
+	</moduleSets>
+
+</assembly>

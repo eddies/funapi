@@ -6,18 +6,9 @@
     <version>0.3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.fedoracommons.funapi</groupId>
   <artifactId>funapi-webapp</artifactId>
   <packaging>war</packaging>
-  <version>0.3-SNAPSHOT</version>
   <name>funapi-webapp</name>
-  <repositories>
-    <repository>
-        <id>fedoracommons</id>
-        <name>Fedora Commons Maven 2 Repository</name>
-        <url>http://m2.fedoracommons.org/repository</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.fedoracommons.funapi</groupId>

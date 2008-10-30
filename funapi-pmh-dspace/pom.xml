@@ -6,10 +6,7 @@
     <version>0.3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.fedoracommons.funapi</groupId>
   <artifactId>funapi-pmh-dspace</artifactId>
-  <packaging>jar</packaging>
-  <version>0.3-SNAPSHOT</version>
   <name>funapi-pmh-dspace</name>
   <repositories>
   </repositories>

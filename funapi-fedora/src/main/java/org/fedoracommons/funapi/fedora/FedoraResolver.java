@@ -1,8 +1,8 @@
 package org.fedoracommons.funapi.fedora;
 
-import static com.yourmediashelf.fedora.client.request.FedoraRequest.getDatastreamDissemination;
-import static com.yourmediashelf.fedora.client.request.FedoraRequest.getRelationships;
-import static com.yourmediashelf.fedora.client.request.FedoraRequest.listDatastreams;
+import static com.yourmediashelf.fedora.client.FedoraClient.getDatastreamDissemination;
+import static com.yourmediashelf.fedora.client.FedoraClient.getRelationships;
+import static com.yourmediashelf.fedora.client.FedoraClient.listDatastreams;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,10 +43,10 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.util.FileUtils;
-import com.sun.jersey.api.client.ClientResponse;
 import com.yourmediashelf.fedora.client.FedoraClient;
 import com.yourmediashelf.fedora.client.FedoraClientException;
 import com.yourmediashelf.fedora.client.FedoraCredentials;
+import com.yourmediashelf.fedora.client.response.FedoraResponse;
 
 /**
  * Implementation of ObjectResolver for a Fedora repository.
@@ -190,7 +190,7 @@ public class FedoraResolver
      */
     private String getJsonArray(String id) throws IOException, UnapiException, FedoraClientException {
         String pid = id.substring(FEDORA_URI.length());
-        ClientResponse response = fedoraClient.execute(getRelationships(pid).subject(id).predicate(HAS_MODEL_URI).build());
+        FedoraResponse response = getRelationships(pid).subject(id).predicate(HAS_MODEL_URI).execute(fedoraClient);
 
         List<String> cmodels = new ArrayList<String>();
         Model model = ModelFactory.createDefaultModel();
@@ -221,14 +221,14 @@ public class FedoraResolver
         JsonNode rootNode = null;
         boolean hasFormatsDS;
         for (String cmodel : cmodels) {
-            response = fedoraClient.execute(listDatastreams(cmodel).format("xml").build());
+            response = listDatastreams(cmodel).format("xml").execute(fedoraClient);
             try {
                 doc = builder.parse(response.getEntityInputStream());
                 Object xpathResult = expr.evaluate(doc, XPathConstants.BOOLEAN);
                 hasFormatsDS = (Boolean)xpathResult;
 
                 if (hasFormatsDS) {
-                    response = fedoraClient.execute(getDatastreamDissemination(cmodel, formatsDS).format("xml").build());
+                    response = getDatastreamDissemination(cmodel, formatsDS).execute(fedoraClient);
                     doc = builder.parse(response.getEntityInputStream());
                 }
             } catch (SAXException e) {

@@ -6,9 +6,9 @@
   <packaging>pom</packaging>
   <version>0.3-SNAPSHOT</version>
   <name>Fedora unAPI HTTP Service</name>
-  <description>Java implementation of the unAPI HTTP service.
-	</description>
-  <url>http://funapi.sourceforge.net/</url>
+  <url>http://mediashelf.github.com/${project.artifactId}</url>
+  <description>Java implementation of the unAPI HTTP service.</description>
+  
   <modules>
     <module>funapi-core</module>
     <module>funapi-fedora</module>
@@ -17,6 +17,11 @@
     <module>funapi-pmh-fedora</module>
     <module>funapi-webapp</module>
   </modules>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
   <repositories>
     <repository>
       <id>duraspace-thirdparty</id>
@@ -28,7 +33,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.5</version>
+      <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -63,61 +68,46 @@
 		</url>
   </issueManagement>
   <scm>
-    <connection>scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi
-		</connection>
-    <developerConnection>
-			scm:svn:https://funapi.svn.sourceforge.net/svnroot/funapi
-		</developerConnection>
-    <url>http://funapi.svn.sourceforge.net/viewvc/funapi/trunk/
-		</url>
+    <connection>scm:git:git://github.com/mediashelf/${project.artifactId}.git
+    </connection>
+    <developerConnection>scm:git:git@github.com:mediashelf/${project.artifactId}.git
+    </developerConnection>
+    <url>http://github.com/mediashelf/${project.artifactId}</url>
   </scm>
-  <organization>
-    <name>Fedora Commons, Inc.</name>
-    <url>http://www.fedora-commons.org/
-		</url>
-  </organization>
   <developers>
     <developer>
-      <id>pangloss</id>
+      <id>eddies</id>
       <name>Edwin Shin</name>
-      <organization>Fedora Commons, Inc.</organization>
-      <timezone>+8</timezone>
+      <email>edwin.shin @ (domain of organization url)</email>
+      <organization>MediaShelf</organization>
+      <organizationUrl>http://www.yourmediashelf.com/</organizationUrl>
+      <roles>
+        <role>lead developer</role>
+      </roles>
+      <timezone>+1</timezone>
     </developer>
   </developers>
+  <organization>
+    <name>MediaShelf</name>
+    <url>http://www.yourmediashelf.com/</url>
+  </organization>
   <licenses>
     <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt
-			</url>
-      <distribution>repo</distribution>
+      <name>GNU Lesser General Public License, Version 3.0</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+      <comments>Copyright (c) 2010 MediaShelf</comments>
     </license>
   </licenses>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
+        <version>2.3.1</version>
+        <inherited>true</inherited>
         <configuration>
-          <source>${compileSource}</source>
-          <target>${compileSource}</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>com.atlassian.maven.plugins
-				</groupId>
-        <artifactId>maven-clover2-plugin</artifactId>
-        <configuration>
-          <jdk>${compileSource}</jdk>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>pre-site</phase>
-            <goals>
-              <goal>instrument</goal>
-              <goal>aggregate</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -139,8 +129,104 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.0</version>
+        <configuration>
+          <!-- see http://jira.codehaus.org/browse/MRELEASE-424 -->
+          <mavenExecutorId>forked-path</mavenExecutorId>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-provider-gitexe</artifactId>
+            <version>1.3</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <inherited>false</inherited>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <header>${basedir}/LICENSE_HEADER</header>
+          <aggregate>true</aggregate>
+          <includes>
+            <include>**/src/main/java/**</include>
+            <include>**/src/test/java/**</include>
+          </includes>
+          <excludes>
+            <exclude>target/**</exclude>
+            <exclude>**/src/test/resources/**</exclude>
+            <exclude>**/src/main/resources/**</exclude>
+            <exclude>**/*.properties</exclude>
+          </excludes>
+          <properties>
+            <name>${project.artifactId}</name>
+            <year>${project.inceptionYear}</year>
+            <holder>${project.organization.name}</holder>
+            <contact>${project.organization.url}</contact>
+          </properties>
+          <encoding>UTF-8</encoding>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-provider-gitexe</artifactId>
+        <version>1.3</version>
+      </extension>
+      <extension>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-manager-plexus</artifactId>
+        <version>1.3</version>
+      </extension>
+      <extension>
+        <groupId>org.kathrynhuxtable.maven.wagon</groupId>
+        <artifactId>wagon-gitsite</artifactId>
+        <version>0.2</version>
+      </extension>
+    </extensions>
   </build>
+  <profiles>
+    <profile>
+      <id>release-sign-artifacts</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -163,7 +249,12 @@
       <dependency>
         <groupId>com.yourmediashelf.fedora.client</groupId>
         <artifactId>fedora-client</artifactId>
-        <version>0.0.3</version>
+        <version>0.1.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.0.1</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
@@ -179,21 +270,19 @@
   </dependencyManagement>
   <distributionManagement>
     <repository>
-      <id>fedoracommons</id>
-      <name>Fedora Commons Maven2 Repository</name>
-      <url>scp://m2.fedoracommons.org/home/m2/repository
-			</url>
+      <id>duraspace-thirdparty</id>
+      <name>Duraspace Thirdparty Maven Repository</name>
+      <url>https://m2.duraspace.org/content/repositories/thirdparty</url>
     </repository>
+    <snapshotRepository>
+      <id>duraspace-snapshots</id>
+      <name>DuraSpace Snapshots Maven Repository</name>
+      <url>https://m2.duraspace.org/content/repositories/snapshots</url>
+    </snapshotRepository>
     <site>
-      <id>funapi-web</id>
-      <!--
-        site upload to SF is currently broken:
-        http://jira.codehaus.org/browse/MSITE-362
-        <url>scp://web.sourceforge.net/home/groups/f/fu/funapi/htdocs</url>
-      -->
-      <url>file:///tmp/funapi-site</url>
+      <id>gh-pages</id>
+      <url>gitsite:git@github.com/eddies/funapi.git</url>
     </site>
-
   </distributionManagement>
   <reporting>
     <plugins>
@@ -263,7 +352,4 @@
       </plugin>
     </plugins>
   </reporting>
-  <properties>
-    <compileSource>1.5</compileSource>
-  </properties>
 </project>

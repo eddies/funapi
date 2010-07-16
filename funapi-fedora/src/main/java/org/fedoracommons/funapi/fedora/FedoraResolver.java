@@ -20,11 +20,6 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
@@ -47,6 +42,8 @@ import com.yourmediashelf.fedora.client.FedoraClient;
 import com.yourmediashelf.fedora.client.FedoraClientException;
 import com.yourmediashelf.fedora.client.FedoraCredentials;
 import com.yourmediashelf.fedora.client.response.FedoraResponse;
+import com.yourmediashelf.fedora.client.response.ListDatastreamsResponse;
+import com.yourmediashelf.fedora.generated.access.DatastreamType;
 
 /**
  * Implementation of ObjectResolver for a Fedora repository.
@@ -181,7 +178,7 @@ public class FedoraResolver
 
     /**
      *
-     * @param id an info:fedora uri (e.g. info:/fedora/demo:1)
+     * @param id an info:fedora uri (e.g. info:fedora/demo:1)
      * @return a JSON array of arrays, e.g. [["disstype","format","type","docs"],[...]]
      * @throws IOException
      * @throws ServiceException
@@ -190,7 +187,8 @@ public class FedoraResolver
      */
     private String getJsonArray(String id) throws IOException, UnapiException, FedoraClientException {
         String pid = id.substring(FEDORA_URI.length());
-        FedoraResponse response = getRelationships(pid).subject(id).predicate(HAS_MODEL_URI).execute(fedoraClient);
+        //FedoraResponse response = getRelationships(pid).subject(id).predicate(HAS_MODEL_URI).format("n-triples").execute(fedoraClient);
+        FedoraResponse response = getRelationships(pid).subject(id).predicate(HAS_MODEL_URI).format("n-triples").execute(fedoraClient);
 
         List<String> cmodels = new ArrayList<String>();
         Model model = ModelFactory.createDefaultModel();
@@ -208,32 +206,30 @@ public class FedoraResolver
         } catch (ParserConfigurationException e) {
             throw new UnapiException(e.getMessage(), e);
         }
-        XPathFactory xpathfactory = XPathFactory.newInstance();
-        XPath xpath = xpathfactory.newXPath();
-        XPathExpression expr = null;
-        try {
-            expr = xpath.compile(String.format("count(/objectDatastreams/datastream[@dsid='%s'])", formatsDS));
-        } catch (XPathExpressionException e) {
-            throw new UnapiException(e.getMessage(), e);
-        }
 
         JsonTypeMapper jtMapper = new JsonTypeMapper();
         JsonNode rootNode = null;
-        boolean hasFormatsDS;
+        ListDatastreamsResponse ldr;
+        List<DatastreamType> cmodelDatastreams;
         for (String cmodel : cmodels) {
-            response = listDatastreams(cmodel).format("xml").execute(fedoraClient);
+            response = null;
+            // check the content model's datastreams for formatsDS
+            ldr = listDatastreams(cmodel).execute(fedoraClient);
+            cmodelDatastreams = ldr.getDatastreams();
+            for (DatastreamType dt : cmodelDatastreams) {
+                if (dt.getDsid().equals(formatsDS)) {
+                    response = getDatastreamDissemination(cmodel, formatsDS).execute(fedoraClient);
+                    continue;
+                }
+            }
+
+            if (response == null) {
+                continue;
+            }
+
             try {
                 doc = builder.parse(response.getEntityInputStream());
-                Object xpathResult = expr.evaluate(doc, XPathConstants.BOOLEAN);
-                hasFormatsDS = (Boolean)xpathResult;
-
-                if (hasFormatsDS) {
-                    response = getDatastreamDissemination(cmodel, formatsDS).execute(fedoraClient);
-                    doc = builder.parse(response.getEntityInputStream());
-                }
             } catch (SAXException e) {
-                throw new UnapiException(e.getMessage(), e);
-            } catch (XPathExpressionException e) {
                 throw new UnapiException(e.getMessage(), e);
             }
 

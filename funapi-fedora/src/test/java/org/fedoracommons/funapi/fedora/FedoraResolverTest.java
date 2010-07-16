@@ -7,46 +7,60 @@ package org.fedoracommons.funapi.fedora;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import mockit.Mocked;
+import mockit.NonStrictExpectations;
 
 import org.fedoracommons.funapi.ObjectResolver;
 import org.fedoracommons.funapi.UnapiFormat;
 import org.fedoracommons.funapi.UnapiFormats;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
-import org.jmock.integration.junit4.JUnit4Mockery;
-import org.jmock.lib.legacy.ClassImposteriser;
+import org.fedoracommons.funapi.UnapiObject;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.yourmediashelf.fedora.client.FedoraClient;
+import com.yourmediashelf.fedora.client.request.GetDatastreamDissemination;
+import com.yourmediashelf.fedora.client.request.GetRelationships;
+import com.yourmediashelf.fedora.client.request.ListDatastreams;
+import com.yourmediashelf.fedora.client.response.FedoraResponse;
+import com.yourmediashelf.fedora.client.response.ListDatastreamsResponse;
+import com.yourmediashelf.fedora.generated.access.DatastreamType;
 
 
 /**
  *
  * @author Edwin Shin
  * @since
- * @version $Id$
  */
-@RunWith(JMock.class)
 public class FedoraResolverTest {
-    private Mockery context;
-
     private final String name = "oai_dc";
     private final String type = "text/xml";
     private final String docs = "http://www.openarchives.org/OAI/2.0/oai_dc.xsd";
-
     private final String json = String.format("<json>[[\"info:fedora/*/DC\",\"%s\",\"%s\",\"%s\"]]</json>", name, type, docs);
 
-    private FedoraClient fedoraClient;
+    @Mocked FedoraClient fedoraClient;
+    @Mocked GetRelationships getRelationships;
+    @Mocked FedoraResponse fedoraResponseA;
+    @Mocked FedoraResponse fedoraResponseB;
+    @Mocked ListDatastreams listDatastreams;
+    @Mocked ListDatastreamsResponse listDatastreamsResponse;
+    @Mocked GetDatastreamDissemination getDatastreamDissemination;
+    @Mocked DatastreamType datastreamType;
+    private List<DatastreamType> cmodelDatastreams;
+    private InputStream relationshipsStream;
+    private InputStream datastreamStream;
     byte[] bytes;
 
     @Before
-    public void setUp() {
-        context = new JUnit4Mockery();
-        context.setImposteriser(ClassImposteriser.INSTANCE);
-        fedoraClient = context.mock(FedoraClient.class);
+    public void setUp() throws Exception {
+        cmodelDatastreams = new ArrayList<DatastreamType>();
+        cmodelDatastreams.add(datastreamType);
+        relationshipsStream = new ByteArrayInputStream("<info:fedora/test-rest:1> <info:fedora/fedora-system:def/model#hasModel> <info:fedora/demo:cmodel> .".getBytes("UTF-8"));
+        datastreamStream = new ByteArrayInputStream(json.getBytes("UTF-8"));
         bytes = json.getBytes();
     }
 
@@ -63,37 +77,29 @@ public class FedoraResolverTest {
         assertEquals(docs, format.getDocs());
     }
 
-    /*
     @Test
     public void testGetFormatsWithId() throws Exception {
-        context.checking(new Expectations() {{
-            one(httpClient).executeMethod(with(any(HttpMethod.class)));
-                will(returnValue(SC_OK));
-            one(fedoraClient).getAPIM();
-                will(returnValue(apim));
-            one(fedoraClient).getAPIA();
-                will(returnValue(apia));
-            one (apim).getRelationships(with(any(String.class)),
-                                          with(any(String.class)));
-                will(returnValue(tuples));
-            one(tuple).getObject();
-                will(returnValue("demo:cmodel"));
-            one(apia).listDatastreams(with(any(String.class)), with(any(String.class)));
-                will(returnValue(dsDefs));
-            one(dsDef).getID();
-                will(returnValue("UNAPI-FORMATS"));
-            one(apia).getDatastreamDissemination(with(any(String.class)),
-                                                    with(any(String.class)),
-                                                    with(any(String.class)));
-                will(returnValue(ds));
-            one(ds).getStream();
-                will(returnValue(bytes));
-        }});
+        new NonStrictExpectations() {
+            {
+                FedoraClient.getRelationships(anyString); returns(getRelationships);
+                getRelationships.subject(anyString); returns(getRelationships);
+                getRelationships.predicate(anyString); returns(getRelationships);
+                getRelationships.format(anyString); returns(getRelationships);
+                getRelationships.execute(fedoraClient); returns(fedoraResponseA);
+                fedoraResponseA.getEntityInputStream(); returns(relationshipsStream);
+                FedoraClient.listDatastreams(anyString); returns(listDatastreams);
+                listDatastreams.execute(fedoraClient); returns(listDatastreamsResponse);
+                listDatastreamsResponse.getDatastreams(); returns(cmodelDatastreams);
+                datastreamType.getDsid(); returns("UNAPI-FORMATS");
+                FedoraClient.getDatastreamDissemination(anyString, anyString); returns(getDatastreamDissemination);
+                getDatastreamDissemination.execute(fedoraClient); returns(fedoraResponseB);
+                fedoraResponseB.getEntityInputStream(); returns(datastreamStream);
+            }
+        };
 
         FedoraResolver resolver = new FedoraResolver();
-        resolver.setHttpClient(httpClient);
         resolver.setFedoraClient(fedoraClient);
-        String id = "demo:cmodel";
+        String id = "info:fedora/demo:cmodel";
         UnapiFormats formats = resolver.getFormats(id);
         assertEquals(id, formats.getId());
         List<UnapiFormat> formatList = formats.getFormats();
@@ -106,36 +112,28 @@ public class FedoraResolverTest {
 
     @Test
     public void testGetObject() throws Exception {
-        context.checking(new Expectations() {{
-            allowing(httpClient).executeMethod(with(any(HttpMethod.class)));
-                will(returnValue(SC_OK));
-            one(fedoraClient).getAPIM();
-                will(returnValue(apim));
-            one(fedoraClient).getAPIA();
-                will(returnValue(apia));
-            one (apim).getRelationships(with(any(String.class)),
-                                          with(any(String.class)));
-                will(returnValue(tuples));
-            one(tuple).getObject();
-                will(returnValue("demo:cmodel"));
-            one(apia).listDatastreams(with(any(String.class)), with(any(String.class)));
-                will(returnValue(dsDefs));
-            one(dsDef).getID();
-                will(returnValue("UNAPI-FORMATS"));
-            one(apia).getDatastreamDissemination(with(any(String.class)),
-                                                    with(any(String.class)),
-                                                    with(any(String.class)));
-                will(returnValue(ds));
-            one(ds).getStream();
-                will(returnValue(bytes));
-        }});
+        new NonStrictExpectations() {
+            {
+                FedoraClient.getRelationships(anyString); returns(getRelationships);
+                getRelationships.subject(anyString); returns(getRelationships);
+                getRelationships.predicate(anyString); returns(getRelationships);
+                getRelationships.format(anyString); returns(getRelationships);
+                getRelationships.execute(fedoraClient); returns(fedoraResponseA);
+                fedoraResponseA.getEntityInputStream(); returns(relationshipsStream);
+                FedoraClient.listDatastreams(anyString); returns(listDatastreams);
+                listDatastreams.execute(fedoraClient); returns(listDatastreamsResponse);
+                listDatastreamsResponse.getDatastreams(); returns(cmodelDatastreams);
+                datastreamType.getDsid(); returns("UNAPI-FORMATS");
+                FedoraClient.getDatastreamDissemination(anyString, anyString); returns(getDatastreamDissemination);
+                getDatastreamDissemination.execute(fedoraClient); returns(fedoraResponseB);
+                fedoraResponseB.getEntityInputStream(); returns(datastreamStream);
+            }
+        };
 
         FedoraResolver resolver = new FedoraResolver();
-        resolver.setHttpClient(httpClient);
         resolver.setFedoraClient(fedoraClient);
-        String id = "demo:cmodel";
+        String id = "info:fedora/demo:cmodel";
         UnapiObject obj = resolver.getObject(id, name);
         assertEquals("http://localhost:8080/fedora/get/demo:cmodel/DC", obj.getRedirectUrl());
     }
-    */
 }

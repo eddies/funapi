@@ -1,4 +1,4 @@
-![MediaShelf fedora-client logo](http://mediashelf.github.com/fedora-client/images/fedora-client.png)
+![funAPI logo](https://github.com/eddies/funapi/blob/master/src/site/resources/images/funapi_logo_horizontal_transparent_400_78.png)
 
 Fedora unAPI HTTP Service (funAPI)
 ==================================

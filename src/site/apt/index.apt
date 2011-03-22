@@ -27,7 +27,7 @@ Installation
 
     funAPI is provided as a Java Web Application aRchive and can be installed in
 any Servlet 2.4 container, such as Tomcat or Jetty. In order to build the funAPI 
-source distribution, the following components are required: Java 5 or higher and 
+source distribution, the following components are required: Java 6 or higher and 
 Maven 2.
 
     Currently, the war file contains classes and libraries for all supported

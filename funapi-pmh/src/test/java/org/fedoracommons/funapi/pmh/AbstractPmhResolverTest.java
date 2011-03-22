@@ -1,6 +1,20 @@
-/* The contents of this file are subject to the license and copyright terms
- * detailed in the license directory at the root of the source tree (also
- * available online at http://www.fedora.info/license/).
+/**
+ * Copyright (C) 2008 MediaShelf <http://www.yourmediashelf.com/>
+ *
+ * This file is part of funapi.
+ *
+ * funapi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * funapi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with funapi.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.fedoracommons.funapi.pmh;
 
@@ -12,27 +26,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
+import mockit.Mock;
+import mockit.MockClass;
+import mockit.Mocked;
+import mockit.Mockit;
+
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.custommonkey.xmlunit.NamespaceContext;
 import org.custommonkey.xmlunit.SimpleNamespaceContext;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.custommonkey.xmlunit.XpathEngine;
 import org.fedoracommons.funapi.FormatException;
 import org.fedoracommons.funapi.IdentifierException;
+import org.fedoracommons.funapi.ObjectResolver;
 import org.fedoracommons.funapi.UnapiException;
 import org.fedoracommons.funapi.UnapiFormat;
 import org.fedoracommons.funapi.UnapiFormats;
 import org.fedoracommons.funapi.UnapiObject;
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
-import org.jmock.integration.junit4.JUnit4Mockery;
-import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -40,28 +52,19 @@ import org.xml.sax.InputSource;
  *
  * @author Edwin Shin
  * @since
- * @version $Id$
  */
-@RunWith(value=JMock.class)
 public abstract class AbstractPmhResolverTest {
-    private Mockery context;
-    private HttpClient httpClient;
-    private HttpGet httpGet;
-    private BasicResponseHandler responseHandler;
+	@Mocked("execute") DefaultHttpClient httpClient;
 
     private XpathEngine engine;
+    
+    private String response;
 
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
-        context = new JUnit4Mockery();
-        context.setImposteriser(ClassImposteriser.INSTANCE);
-        httpClient = context.mock(HttpClient.class);
-        httpGet = context.mock(HttpGet.class);
-        responseHandler = context.mock(BasicResponseHandler.class);
-
         XMLUnit.setIgnoreWhitespace(true);
         engine = XMLUnit.newXpathEngine();
         Map<String, String> nsMap = new HashMap<String, String>();
@@ -70,13 +73,14 @@ public abstract class AbstractPmhResolverTest {
         nsMap.put("dc", "http://purl.org/dc/elements/1.1/");
         NamespaceContext ctx = new SimpleNamespaceContext(nsMap);
         engine.setNamespaceContext(ctx);
+        
+        Mockit.setUpMocks(new MockAbstractPmhResolver());
     }
 
     public abstract AbstractPmhResolver getResolver() throws UnapiException;
 
     @Test
     public void testGetFormats() throws Exception {
-        final String response;
         response = "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" " +
                    "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
                    "         xsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/ " +
@@ -92,14 +96,17 @@ public abstract class AbstractPmhResolverTest {
                    "  </ListMetadataFormats> " +
                    "</OAI-PMH>";
 
-        context.checking(new Expectations() {{
-            one(httpClient).execute(with(any(HttpGet.class)), with(any(BasicResponseHandler.class)));
-            will(returnValue(response));
-        }});
-
+        /*
+        new MockUp<AbstractPmhResolver>() {
+            @SuppressWarnings("unused") // referenced indirectly by getFormats()
+			@Mock
+            String getResponse(String url) {
+               return response;
+            }
+        };
+        */
+        
         AbstractPmhResolver resolver = getResolver();
-        resolver.setHttpClient(httpClient);
-        resolver.setGetRequest(httpGet);
         UnapiFormats formats = resolver.getFormats();
         assertNull(formats.getId());
         List<UnapiFormat> formatList = formats.getFormats();
@@ -107,11 +114,10 @@ public abstract class AbstractPmhResolverTest {
     }
 
     @Test
-    public void getObject() throws Exception {
+    public void testGetObject() throws Exception {
         String id = "foo";
         String format = "oai_dc";
 
-        final String response;
         response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> " +
                    "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" " +
                    "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -139,14 +145,7 @@ public abstract class AbstractPmhResolverTest {
                    "  </GetRecord> " +
                    "</OAI-PMH>";
 
-        context.checking(new Expectations() {{
-            one(httpClient).execute(with(any(HttpGet.class)), with(any(BasicResponseHandler.class)));
-            will(returnValue(response));
-        }});
-
-        AbstractPmhResolver resolver = getResolver();
-        resolver.setHttpClient(httpClient);
-        resolver.setGetRequest(httpGet);
+        ObjectResolver resolver = getResolver();
         UnapiObject obj = resolver.getObject(id, format);
         assertNull(obj.getRedirectUrl());
         InputStream is = obj.getInputStream();
@@ -168,7 +167,6 @@ public abstract class AbstractPmhResolverTest {
         String id = "foo";
         String format = "oai_dc";
 
-        final String response;
         response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                    "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" " +
                    "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -186,14 +184,7 @@ public abstract class AbstractPmhResolverTest {
                    "<dc:title>blah</dc:title><dc:creator>Shin, Edwin</dc:creator>" +
                    "</oai_dc:dc></metadata></record></GetRecord></OAI-PMH>";
 
-        context.checking(new Expectations() {{
-            one(httpClient).execute(with(any(HttpGet.class)), with(any(BasicResponseHandler.class)));
-            will(returnValue(response));
-        }});
-
         AbstractPmhResolver resolver = getResolver();
-        resolver.setHttpClient(httpClient);
-        resolver.setGetRequest(httpGet);
         UnapiObject obj = resolver.getObject(id, format);
         assertNull(obj.getRedirectUrl());
         InputStream is = obj.getInputStream();
@@ -204,7 +195,6 @@ public abstract class AbstractPmhResolverTest {
 
     @Test(expected=IdentifierException.class)
     public void testIdDoesNotExist() throws Exception {
-        final String response;
         response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> " +
                    "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" " +
                    "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -215,20 +205,12 @@ public abstract class AbstractPmhResolverTest {
                    "  <error code=\"idDoesNotExist\"/> " +
                    "</OAI-PMH>";
 
-        context.checking(new Expectations() {{
-            one(httpClient).execute(with(any(HttpGet.class)), with(any(BasicResponseHandler.class)));
-            will(returnValue(response));
-        }});
-
         AbstractPmhResolver resolver = getResolver();
-        resolver.setHttpClient(httpClient);
-        resolver.setGetRequest(httpGet);
         resolver.getObject("foo", "bar");
     }
 
     @Test(expected=FormatException.class)
     public void testCannotDisseminateFormat() throws Exception {
-        final String response;
         response = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> " +
                    "<OAI-PMH xmlns=\"http://www.openarchives.org/OAI/2.0/\" " +
                    "         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
@@ -239,14 +221,25 @@ public abstract class AbstractPmhResolverTest {
                    "  <error code=\"cannotDisseminateFormat\"/> " +
                    "</OAI-PMH>";
 
-        context.checking(new Expectations() {{
-            one(httpClient).execute(with(any(HttpGet.class)), with(any(BasicResponseHandler.class)));
-            will(returnValue(response));
-        }});
-
         AbstractPmhResolver resolver = getResolver();
-        resolver.setHttpClient(httpClient);
-        resolver.setGetRequest(httpGet);
         resolver.getObject("foo", "bar");
+    }
+    
+    public void setResolverResponse(String response) {
+    	this.response = response;
+    }
+    
+    /**
+     * Mock for AbstractPmhResolver.getResponse()
+     * 
+     * @author Edwin Shin
+     *
+     */
+    @MockClass(realClass = AbstractPmhResolver.class)
+    public final class MockAbstractPmhResolver {
+    	@Mock
+        String getResponse(String url) {
+           return response;
+        }
     }
 }

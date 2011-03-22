@@ -26,13 +26,13 @@
     <dependency>
       <groupId>mockit</groupId>
       <artifactId>jmockit</artifactId>
-      <version>0.998</version>
+      <version>0.999.8</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8.1</version>
+      <version>4.8.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -80,10 +80,18 @@
     </license>
   </licenses>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.3.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.1</version>
+        <version>2.3.2</version>
         <inherited>true</inherited>
         <configuration>
           <source>1.6</source>
@@ -113,7 +121,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
         <configuration>
           <!-- see http://jira.codehaus.org/browse/MRELEASE-424 -->
           <mavenExecutorId>forked-path</mavenExecutorId>
@@ -122,7 +130,7 @@
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>1.3</version>
+            <version>1.4</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -130,7 +138,7 @@
         <inherited>false</inherited>
         <groupId>com.mycila.maven-license-plugin</groupId>
         <artifactId>maven-license-plugin</artifactId>
-        <version>1.6.0</version>
+        <version>1.9.0</version>
         <configuration>
           <header>${basedir}/LICENSE_HEADER</header>
           <aggregate>true</aggregate>
@@ -151,6 +159,7 @@
             <contact>${project.organization.url}</contact>
           </properties>
           <encoding>UTF-8</encoding>
+          <strictCheck>true</strictCheck>
         </configuration>
         <executions>
           <execution>
@@ -160,22 +169,65 @@
           </execution>
         </executions>
       </plugin>
+      <!-- site plugin reporting moved here as of Maven 3 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.0-beta-3</version>
+        <configuration>
+          <reportPlugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>2.7</version>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-jxr-plugin</artifactId>
+              <version>2.2</version>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-report-plugin</artifactId>
+              <version>2.7.2</version>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-changelog-plugin</artifactId>
+              <version>2.2</version>
+              <configuration>
+                <displayFileDetailUrl>http://github.com/mediashelf/${project.artifactId}/blob/master/%FILE% </displayFileDetailUrl>
+              </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-project-info-reports-plugin</artifactId>
+              <version>2.3.1</version>
+            </plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>cobertura-maven-plugin</artifactId>
+              <version>2.4</version>
+            </plugin>
+          </reportPlugins>
+        </configuration>
+      </plugin>
     </plugins>
     <extensions>
       <extension>
         <groupId>org.apache.maven.scm</groupId>
         <artifactId>maven-scm-provider-gitexe</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
       </extension>
       <extension>
         <groupId>org.apache.maven.scm</groupId>
         <artifactId>maven-scm-manager-plexus</artifactId>
-        <version>1.3</version>
+        <version>1.4</version>
       </extension>
       <extension>
         <groupId>org.kathrynhuxtable.maven.wagon</groupId>
         <artifactId>wagon-gitsite</artifactId>
-        <version>0.2</version>
+        <version>0.3.1</version>
       </extension>
     </extensions>
   </build>
@@ -230,22 +282,22 @@
       <dependency>
         <groupId>com.yourmediashelf.fedora.client</groupId>
         <artifactId>fedora-client</artifactId>
-        <version>0.1.2</version>
+        <version>0.1.4</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.0.1</version>
+        <version>4.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-asl</artifactId>
-        <version>0.9.3</version>
+        <version>0.9.5</version>
       </dependency>
       <dependency>
         <groupId>com.hp.hpl.jena</groupId>
         <artifactId>jena</artifactId>
-        <version>2.6.2</version>
+        <version>2.6.4</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -265,74 +317,6 @@
       <url>gitsite:git@github.com/eddies/funapi.git</url>
     </site>
   </distributionManagement>
-  <reporting>
-    <plugins>
-      <plugin>
-        <artifactId>maven-project-info-reports-plugin
-				</artifactId>
-        <configuration>
-          <locales>en</locales>
-          <inputencoding>utf-8</inputencoding>
-          <outputencoding>utf-8</outputencoding>
-          <dependencyLocationEnabled>false</dependencyLocationEnabled>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>dependencies</report>
-              <report>project-team</report>
-              <!--
-                <report>mailing-list</report> <report>cim</report>
-              -->
-              <report>issue-tracking</report>
-              <report>license</report>
-              <report>scm</report>
-              <report>index</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <!-- <goal>javadoc:aggregate</goal>-->
-          <aggregate>true</aggregate>
-          <encoding>utf-8</encoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>com.atlassian.maven.plugins
-				</groupId>
-        <artifactId>maven-clover2-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <configuration>
-          <aggregate>true</aggregate>
-          <targetJdk>${compileSource}</targetJdk>
-          <rulesets>
-            <ruleset>/rulesets/basic.xml</ruleset>
-            <ruleset>/rulesets/controversial.xml
-						</ruleset>
-            <ruleset>/rulesets/sunsecure.xml</ruleset>
-          </rulesets>
-          <format>xml</format>
-          <linkXref>true</linkXref>
-          <sourceEncoding>utf-8</sourceEncoding>
-          <minimumTokens>100</minimumTokens>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <configuration>
-          <aggregate>true</aggregate>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
   <repositories>
     <repository>
       <id>duraspace-thirdparty</id>
@@ -340,9 +324,9 @@
       <url>https://fedora-commons.org/m2/content/repositories/thirdparty</url>
     </repository>
     <repository>
-      <id>maven2-repository.dev.java.net</id>
-      <name>Java.net Maven 2 Repository</name>
-      <url>http://download.java.net/maven/2</url>
+      <id>jmockit</id>
+      <name>JMockit Maven 2 Repository</name>
+      <url>http://jmockit.googlecode.com/svn/maven-repo/</url>
     </repository>
   </repositories>
 </project>

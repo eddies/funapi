@@ -1,3 +1,21 @@
+/**
+ * Copyright (C) 2008 MediaShelf <http://www.yourmediashelf.com/>
+ *
+ * This file is part of funapi.
+ *
+ * funapi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * funapi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with funapi.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.fedoracommons.funapi.pmh;
 
 import java.io.ByteArrayInputStream;
@@ -51,7 +69,6 @@ import org.xml.sax.InputSource;
  *
  * @author Edwin Shin
  * @since 0.1
- * @version $Id$
  */
 public abstract class AbstractPmhResolver
         implements ObjectResolver {
@@ -103,7 +120,6 @@ public abstract class AbstractPmhResolver
         try {
             String record = getRecord(id, format);
             XPath xpath = getXPath();
-
             Node pmh = (Node)xpath.evaluate("//oai:OAI-PMH",
                                             new InputSource(new StringReader(record)),
                                             XPathConstants.NODE);
@@ -179,16 +195,8 @@ public abstract class AbstractPmhResolver
                                       new UsernamePasswordCredentials(getUsername(),
                                                                       getPassword()));
         }
-        setHttpClient(httpClient);
-        return httpClient;
-    }
-
-    protected void setHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
-    }
-
-    protected void setGetRequest(HttpGet httpGet) {
-        this.httpGet = httpGet;
+        return httpClient;
     }
 
     private String listMetadataFormats() throws UnapiException {

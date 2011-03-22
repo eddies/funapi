@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="Fedora unAPI">
   <version position="left" />
-  <project>
 	<bannerLeft>
 		<name>funAPI</name>
 		<src>http://funapi.sourceforge.net/images/funapi_logo_horizontal_transparent_400_78.png</src>

@@ -3,7 +3,7 @@
   <groupId>org.fedoracommons.funapi</groupId>
   <artifactId>funapi</artifactId>
   <packaging>pom</packaging>
-  <version>0.3</version>
+  <version>0.4-SNAPSHOT</version>
   <name>Fedora unAPI HTTP Service</name>
   <url>http://eddies.github.com/${project.artifactId}</url>
   <description>Java implementation of the unAPI HTTP service.</description>

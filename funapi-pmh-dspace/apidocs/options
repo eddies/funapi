@@ -1,0 +1,30 @@
+-classpath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/funapi-core-0.3.jar:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/funapi-pmh-0.3.jar:/Users/eddie/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/eddie/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/eddie/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/eddie/.m2/repository/commons-codec/commons-codec/1.3/commons-codec-1.3.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2008-2011 <a href="http://www.yourmediashelf.com/">MediaShelf</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'funapi-pmh-dspace 0.3 API'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-linkoffline
+'http://eddies.github.com/funapi-core/funapi-core/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/site/apidocs'
+-linkoffline
+'http://eddies.github.com/funapi-fedora/funapi-fedora/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/site/apidocs'
+-linkoffline
+'http://eddies.github.com/funapi-pmh/funapi-pmh/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/site/apidocs'
+-use
+-version
+-windowtitle
+'funapi-pmh-dspace 0.3 API'

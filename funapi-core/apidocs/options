@@ -1,0 +1,28 @@
+-classpath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/classes:/Users/eddie/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2008-2011 <a href="http://www.yourmediashelf.com/">MediaShelf</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'funapi-core 0.3 API'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-linkoffline
+'http://eddies.github.com/funapi-fedora/funapi-fedora/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/site/apidocs'
+-linkoffline
+'http://eddies.github.com/funapi-pmh/funapi-pmh/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/site/apidocs'
+-use
+-version
+-windowtitle
+'funapi-core 0.3 API'

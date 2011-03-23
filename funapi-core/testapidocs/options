@@ -1,0 +1,30 @@
+-classpath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/test-classes:/Users/eddie/.m2/repository/xmlunit/xmlunit/1.3/xmlunit-1.3.jar:/Users/eddie/.m2/repository/org/springframework/spring-test/2.5.5/spring-test-2.5.5.jar:/Users/eddie/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/eddie/.m2/repository/mockit/jmockit/0.999.8/jmockit-0.999.8.jar:/Users/eddie/.m2/repository/org/springframework/spring-core/2.5.5/spring-core-2.5.5.jar:/Users/eddie/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/eddie/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/src/test/java'
+-author
+-bottom
+'Copyright &#169; 2008-2011 <a href="http://www.yourmediashelf.com/">MediaShelf</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/site/testapidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'funapi-core 0.3 Test API'
+-link
+'../apidocs'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-linkoffline
+'http://eddies.github.com/funapi-fedora/funapi-fedora/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/site/testapidocs'
+-linkoffline
+'http://eddies.github.com/funapi-pmh/funapi-pmh/apidocs' '/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/site/testapidocs'
+-use
+-version
+-windowtitle
+'funapi-core 0.3 Test API'

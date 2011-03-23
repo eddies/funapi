@@ -4,7 +4,7 @@
 	<bannerLeft>
 		<name>funAPI</name>
 		<src>http://funapi.sourceforge.net/images/funapi_logo_horizontal_transparent_400_78.png</src>
-		<href>http://funapi.sourceforge.net/</href>
+		<href>https://github.com/eddies/funapi</href>
 	</bannerLeft>
 	<body>
 		<links>
@@ -14,8 +14,8 @@
 
 		<menu name="Fedora unAPI">
       <item name="Introduction" href="index.html"/>
-      <item name="Usage" href="usage.html"/>
-      <item name="Developers" href="developers.html"/>
+      <!-- <item name="Usage" href="usage.html"/> -->
+      <!-- <item name="Developers" href="developers.html"/> -->
     </menu>
 
     <menu name="Project Information">
@@ -38,5 +38,6 @@
         <item name="Test JavaDocs" href="testapidocs/index.html"/>
         <item name="Browse Test Source Code" href="xref-test/index.html"/>
     </menu>
+    <menu ref="modules" />
 	</body>
 </project>

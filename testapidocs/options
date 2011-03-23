@@ -1,0 +1,26 @@
+-classpath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-fedora/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-fedora/target/test-classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-webapp/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-webapp/target/test-classes:/Users/eddie/.m2/repository/xmlunit/xmlunit/1.3/xmlunit-1.3.jar:/Users/eddie/.m2/repository/log4j/log4j/1.2.13/log4j-1.2.13.jar:/Users/eddie/.m2/repository/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar:/Users/eddie/.m2/repository/com/sun/jersey/jersey-core/1.5/jersey-core-1.5.jar:/Users/eddie/.m2/repository/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar:/Users/eddie/.m2/repository/org/springframework/spring-core/2.5.5/spring-core-2.5.5.jar:/Users/eddie/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/Users/eddie/.m2/repository/eu/medsea/mimeutil/mime-util/2.1.3/mime-util-2.1.3.jar:/Users/eddie/.m2/repository/org/apache/santuario/xmlsec/1.4.4/xmlsec-1.4.4.jar:/Users/eddie/.m2/repository/org/springframework/spring-test/2.5.5/spring-test-2.5.5.jar:/Users/eddie/.m2/repository/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/target/classes:/Users/eddie/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar:/Users/eddie/.m2/repository/mockit/jmockit/0.999.8/jmockit-0.999.8.jar:/Users/eddie/.m2/repository/com/ibm/icu/icu4j/3.4.4/icu4j-3.4.4.jar:/Users/eddie/.m2/repository/com/hp/hpl/jena/jena/2.6.4/jena-2.6.4.jar:/Users/eddie/.m2/repository/org/codehaus/jackson/jackson-mapper-lgpl/1.6.4/jackson-mapper-lgpl-1.6.4.jar:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-fedora/target/classes:/Users/eddie/.m2/repository/org/apache/httpcomponents/httpclient/4.0.3/httpclient-4.0.3.jar:/Users/eddie/.m2/repository/org/jvnet/mimepull/1.4/mimepull-1.4.jar:/Users/eddie/.m2/repository/org/codehaus/jackson/jackson-asl/0.9.5/jackson-asl-0.9.5.jar:/Users/eddie/.m2/repository/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar:/Users/eddie/.m2/repository/com/sun/jersey/contribs/jersey-multipart/1.5/jersey-multipart-1.5.jar:/Users/eddie/.m2/repository/com/sun/jersey/jersey-client/1.5/jersey-client-1.5.jar:/Users/eddie/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:/Users/eddie/.m2/repository/avalon-framework/avalon-framework/4.1.3/avalon-framework-4.1.3.jar:/Users/eddie/.m2/repository/com/hp/hpl/jena/iri/0.8/iri-0.8.jar:/Users/eddie/.m2/repository/org/codehaus/jackson/jackson-core-lgpl/1.6.4/jackson-core-lgpl-1.6.4.jar:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/target/classes:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/target/classes:/Users/eddie/.m2/repository/joda-time/joda-time/1.6.2/joda-time-1.6.2.jar:/Users/eddie/.m2/repository/logkit/logkit/1.0.1/logkit-1.0.1.jar:/Users/eddie/.m2/repository/com/yourmediashelf/fedora/client/fedora-client/0.1.4/fedora-client-0.1.4.jar:/Users/eddie/.m2/repository/commons-codec/commons-codec/1.3/commons-codec-1.3.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-core/src/test/java:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-fedora/src/test/java:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh/src/test/java:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-dspace/src/test/java:/Users/eddie/Documents/workspace/funapi/target/checkout/funapi-pmh-fedora/src/test/java'
+-author
+-bottom
+'Copyright &#169; 2008-2011 <a href="http://www.yourmediashelf.com/">MediaShelf</a>. All Rights Reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/eddie/Documents/workspace/funapi/target/checkout/target/site/testapidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Fedora unAPI HTTP Service 0.3 Test API'
+-link
+'../apidocs'
+-link
+'http://java.sun.com/javase/6/docs/api'
+-use
+-version
+-windowtitle
+'Fedora unAPI HTTP Service 0.3 Test API'
